@@ -5,7 +5,7 @@ Features:
 
 - Custom date range for displaying a calendar grid from a given start date to a given end date
 - Options for 5 day (for business days only) or 7 day (including weekends) weeks
-- Options to use pre-build calendar event templates or to create your own 
+- Options to use pre-built calendar event templates or to create your own 
 - Drag and drop functionality (In-progress)
 
 
