@@ -39,19 +39,19 @@ Once you have the module, you may now use the component using the following tag:
 
 *Inputs*
 
-showWeekends: boolean       //Default is false
-startDate: Date             //Start date for range to display, supports two-way binding
-endDate: Date               //End date for range to display, supports two-way binding
-querySummary: string        //Optional text to discribe the data displayin in the calendar
-button-style: string        //Class(es) as a string to style buttons
-events: CalendarEvent[]     //List of CalendarEvent Objects
+- showWeekends: boolean       //Default is false
+- startDate: Date             //Start date for range to display, supports two-way binding
+- endDate: Date               //End date for range to display, supports two-way binding
+- querySummary: string        //Optional text to discribe the data displayin in the calendar
+- button-style: string        //Class(es) as a string to style buttons
+- events: CalendarEvent[]     //List of CalendarEvent Objects
 
 
 *Outputs*
 
-eventAction                 //Emits any event fired from a CalendarEvent Object
-startDateChange             //Emits whenever the startDate changes
-endDateChange               //Emits whenever the endDate changes
+- eventAction                 //Emits any event fired from a CalendarEvent Object
+- startDateChange             //Emits whenever the startDate changes
+- endDateChange               //Emits whenever the endDate changes
 
 
 
