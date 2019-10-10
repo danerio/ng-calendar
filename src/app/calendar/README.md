@@ -1,4 +1,4 @@
-#ABOUT
+
 ***ng-calendar*** is an accessible (WCAG 2.0 compliant), fully customizable calendar component written for Angular 4+. 
 
 Features: 
