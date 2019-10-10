@@ -1,0 +1,10 @@
+<div class="bordered" [style.background]="background">
+  <!-- Displaying the title  -->
+  <p>{{data.title}}</p>
+  <p>
+    {{randomText}}
+    <!-- Adding a button that calls the function to communicate with the main calendar -->
+    <button (click)="sendDataToParent($event)">Click Me</button>
+  </p>
+
+</div>

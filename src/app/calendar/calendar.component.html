@@ -1,0 +1,62 @@
+<div class="float-right">
+	<button class="{{buttonStyleClass}}" (click)="toggleShowWeekends()"> {{showWeekends? "Hide":"Show"}} Weekends</button>
+
+</div>
+
+<h2 id="calendar-label">{{startDate | date:'longDate'}} - {{endDate | date:'longDate'}} {{numberOfDays !== undefined ?
+	"("+numberOfDays+ " Day" + (numberOfDays !== 1 ? "s" : "") + ")":
+	""}} </h2>
+<p *ngIf="querySummary">{{querySummary}}</p>
+<div id="calendar-container">
+	<ol aria-labelledby="calendar-label" id="calendar" (mouseleave)="onMouseLeaveCalendar()" role="listbox"
+	 (keyup.arrowright)="moveToNextDay()">
+
+		<!-- Days of the Week headers -->
+		<!-- Not visible to screen reader, presentation only -->
+
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" *ngIf="showWeekends" [style.width.%]="width">Sunday</li>
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" [style.width.%]="width"> Monday</li>
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" [style.width.%]="width"> Tuesday</li>
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" [style.width.%]="width"> Wednesday</li>
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" [style.width.%]="width"> Thursday</li>
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" [style.width.%]="width"> Friday</li>
+		<li class="day-header unselectable" aria-role="presentation" aria-hidden="true" *ngIf="showWeekends" [style.width.%]="width">Saturday</li>
+
+		<!-- End of day headers -->
+
+
+
+		<ng-container *ngFor="let day of dates; let i = index">
+			<li class="date-display" [class.dull]="day.outsideRange" [class.normal]="!day.outsideRange && !day.isToday"
+			 [class.today]="day.isToday" [style.width.%]="width" (dragenter)="onEventDrag(day, $event)" (dragover)="allowDrop(day, $event)"
+			 (drop)="onEventDrop(day)">
+
+
+				<div aria-level="3" role="heading" title="{{day.date | date:'fullDate'}}" class="date-display-text unselectable" id="{{day.date | date:'EEEE,MMMMd,y'}}-label">
+					<span aria-hidden="true" class="short-form" [class.bold-text]="(day.date | date:'d') == '1'">
+
+						<!-- {{((day.date | date:'d') == "1") ? (day.date | date: 'LLL') + " " : ""}} -->
+						{{((day.date | date:'d') == "1") ? (day.date | date: 'LLL') + " " : ""}}{{day.date | date:'dd'}}
+					</span>
+					<span aria-hidden="true" class="long-form">
+						{{day.date | date:'fullDate'}}
+					</span>
+
+					<span class="sr-only screen-reader-date">
+						{{day.date | date:'fullDate'}}
+					</span>
+
+				</div>
+				<ul attr.aria-labelledby="{{day.date | date:'EEEE,MMMMd,y'}}-label" *ngIf="!day.outsideRange">
+					<ng-container *ngFor="let event of day.events">
+						<li (keyup.space)="onEventSelect(event)" [style.background-color]="event.backgroundColor" [attr.draggable]="event.draggable"
+						 (dragstart)="setCurrentDragged(event)" class="calendar-event">
+							<calendar-event [event]="event" (onAction)="onEventAction($event, day)"></calendar-event>
+						</li>
+					</ng-container>
+				</ul>
+			</li>
+		</ng-container>
+
+	</ol>
+</div>
